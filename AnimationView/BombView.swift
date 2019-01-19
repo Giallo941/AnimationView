@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class SnowView: UIView {
+class BombView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,27 +19,35 @@ class SnowView: UIView {
         emitter.emitterSize = bounds.size
         emitter.emitterShape = CAEmitterLayerEmitterShape.rectangle
         
+        let emitterCellImage = UIImage(named: "bomb")
+        let emitterCell = setupEmitterCells(with: emitterCellImage!)
+        
+        emitter.emitterCells = [emitterCell]
+    }
+    
+    private func setupEmitterCells(with image: UIImage) -> CAEmitterCell {
         let emitterCell = CAEmitterCell()
-        emitterCell.contents = UIImage(named: "snow")!.cgImage
-        emitterCell.birthRate = 200
+        emitterCell.contents = image.cgImage
+        emitterCell.birthRate = 8
         emitterCell.lifetime = 5
         emitterCell.color = UIColor.white.cgColor
         emitterCell.redRange = 0.0
-        emitterCell.blueRange = 0.1
+        emitterCell.blueRange = 0.0
         emitterCell.greenRange = 0.0
         emitterCell.velocity = 10
-        emitterCell.velocityRange = 500
+        emitterCell.velocityRange = 50
         emitterCell.emissionRange = CGFloat(Double.pi / 2)
         emitterCell.emissionLongitude = CGFloat(Double.pi)
-        emitterCell.yAcceleration = 70
-        emitterCell.xAcceleration = 0
-        emitterCell.scale = 0.33
-        emitterCell.scaleRange = 1.25
-        emitterCell.scaleSpeed = -0.25
+        emitterCell.yAcceleration = 80
+        emitterCell.xAcceleration = 40
+        emitterCell.scale = 1.5
+        emitterCell.scaleRange = 0.5
+        emitterCell.scaleSpeed = 0
         emitterCell.alphaRange = 0.5
         emitterCell.alphaSpeed = -0.15
+        emitterCell.spin = CGFloat(3)
         
-        emitter.emitterCells = [emitterCell]
+        return emitterCell
     }
     
     required init?(coder aDecoder: NSCoder) {

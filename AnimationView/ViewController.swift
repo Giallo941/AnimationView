@@ -11,13 +11,13 @@ import QuartzCore
 
 class ViewController: UIViewController {
     
-    var snowView: SnowView!
+    var snowView: BombView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        snowView = SnowView(frame: CGRect(x: -150, y: -100, width: 300, height: 50))
-        let snowClipView = UIView(frame: view.frame.offsetBy(dx: 0, dy: 0))
+        snowView = BombView(frame: CGRect(x: -150, y: -100, width: 300, height: 100))
+        let snowClipView = BombClipView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         snowClipView.clipsToBounds = true
         snowClipView.addSubview(snowView)
         view.addSubview(snowClipView)
